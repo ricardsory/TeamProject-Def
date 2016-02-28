@@ -13,8 +13,9 @@ def newUser(request):
     if request.method == "POST":
         form = CreateAccount(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.save()
             return redirect('APP_PT.views.login')
     else:
         form = CreateAccount()
-        return render(request, 'APP_PT/newUser.html', {'form': form})
+    return render(request, 'APP_PT/newUser.html', {'form': form})

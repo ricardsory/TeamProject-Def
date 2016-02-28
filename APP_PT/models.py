@@ -25,7 +25,7 @@ class User(models.Model):
     last_name2 = models.CharField(max_length=30)
     email = models.CharField(max_length=50)
     password = models.CharField(max_length=20)
-    type = models.IntegerField
+    type = models.IntegerField()
 
 class Project(models.Model):
     pr_name = models.CharField(max_length=30)

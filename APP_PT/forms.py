@@ -3,8 +3,8 @@ from .models import User
 
 # Create your views here.
 
-class CreateAccount(forms.Form):
+class CreateAccount(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name1', 'last_name2' ,'email' , 'password', 'type')
+        fields = ('first_name', 'last_name1', 'last_name2' ,'email' , 'password', 'type',)
