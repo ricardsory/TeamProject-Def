@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Registration</title>
+    <title>Create Project</title>
 
    <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -23,33 +23,23 @@
 
 <script>
 
-    function checkData() {
-
+        function checkData() {
         if (document.getElementById("inputName").value == "") {
-            alert("Debes introducir tu nombre");
+            alert("Debes introducir el nombre del Proyecto");
         }
-        else if (document.getElementById("inputEmail").value == "") {
-            alert("Debes introducir tu email");
+        else if (document.getElementById("iniDate").value == "") {
+            alert("Debes introducir la fecha de inicio del Proyecto");
         }
-        else if (document.getElementById("inputLastName1").value == "") {
-            alert("Debes introducir tus apellidos");
+        else if (document.getElementById("finDate").value == "") {
+            alert("Debes introducir la fecha de finalización del Proyecto");
         }
-        else if (document.getElementById("inputLastName2").value == "") {
-            alert("Debes introducir tus apellidos");
-        }
-        else if (document.getElementById("inputPassword").value == "") {
-            alert("Debes introducir la contraseña");
-        }
-        else if (document.getElementById("inputPassword2").value == "") {
-            alert("Debes confirmar la contraseña");
-        }
-        else if (document.getElementById("inputPassword").value != document.getElementById("inputPassword2").value) {
-            alert("Las contraseñas deben coincidir");
+        else {
+            document.forms[0].submit();
         }
     }
 
     function goto() {
-        location.href = "login_old.html";
+        location.href = "menu.html";
     }
 
 </script>
@@ -126,12 +116,9 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-          </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li><a style=color:#FFF;" href=""></a></li>
-          </ul>
+            <span class="icon-bar"> <a class="navbar-brand custom-brand" style="color:white" href="createProject.html">Crear Proyecto </a></span>
+            <span class="icon-bar"> <a class="navbar-brand custom-brand" style="color:white" href="MyProjects.html">Mis Proyectos</a></span>
+            <span class="icon-bar"> <a class="navbar-brand custom-brand" style="color:white" href="CreatePoll.html">Crear Encuesta</a></span>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
@@ -142,25 +129,22 @@
           {% csrf_token %}
           <table style="width:100%">
               <tr>
-                  <td>
-                    {{ form.as_p }}
-                </td>
+                <td style="width:100%"><h2 class="form-signin-heading"><u>Crear Proyecto</u></h2></td>
               </tr>
+              <tr><td>&nbsp</td></tr>
               <tr>
-                  <td>
-                      <select name="type" id="type">
-                          <option value="1">Admin</option>
-                          <option value="2">Student</option>
-                      </select>
-                  </td>
+                  <td>{{ form.as_p }}</td>
               </tr>
-              <tr>
-                  <td style="height:40px;"></td>
-              </tr>
+              <tr><td>&nbsp</td></tr>
               <tr>
                 <td>
-                    <button class="btn btn-lg btn-success btn-block" type="submit">Registrarse</button>
-                    <button class="btn btn-lg btn-block" style="background-color: darkred; color: white" onclick="goto()">Cancelar</button>
+                    <button class="btn btn-lg btn-success btn-block" style="width:200px; display:block; margin-left: 50px" type="submit">Crear</button>
+               </td>
+              </tr>
+              <tr><td>&nbsp</td></tr>
+              <tr>
+                <td>
+                   <button class="btn btn-lg btn-block" style="background-color: darkred; color: white; width:200px; display:block; margin-left: 50px" onclick="goto()">Cancelar</button>
                 </td>
               </tr>
           </table>

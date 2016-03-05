@@ -1,14 +1,16 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils import timezone
+
 
 # Create your models here.
 
 # Create your models here.
 
 class Rubrica(models.Model):
-    e_who = models.IntegerField
-    e_when = models.IntegerField
+    e_who = models.IntegerField(default=0)
+    e_when = models.IntegerField(default=timezone.now)
 
 
 class Pregunta(models.Model):
@@ -25,21 +27,21 @@ class User(models.Model):
     last_name2 = models.CharField(max_length=30)
     email = models.CharField(max_length=50)
     password = models.CharField(max_length=20)
-    type = models.IntegerField()
+    type = models.CharField(max_length=20)
 
 class Project(models.Model):
     pr_name = models.CharField(max_length=30)
     pr_description = models.CharField(max_length=200)
     pr_user = models.ForeignKey(User)
-    p_ini_date = models.DateField
-    p_deadline = models.DateField
+    pr_ini_date = models.DateField(default=timezone.now)
+    pr_deadline = models.DateField(default=timezone.now)
 
 class Actividad(models.Model):
     ac_name = models.CharField(max_length=30)
     ac_description = models.CharField(max_length=200)
-    ac_percentage = models.IntegerField
-    ac_ini_date = models.DateField
-    ac_deadline = models.DateField
+    ac_percentage = models.IntegerField(default=0)
+    ac_ini_date = models.DateField(default=timezone.now)
+    ac_deadline = models.DateField(default=timezone.now)
     ac_projectID = models.ForeignKey(Project)
 
 class Equipo(models.Model):
