@@ -24,7 +24,7 @@ class Opcion(models.Model):
 class User(models.Model):
     first_name = models.CharField(max_length=30)
     last_name1 = models.CharField(max_length=30)
-    last_name2 = models.CharField(max_length=30)
+    birthyear = models.CharField(max_length=30)
     email = models.CharField(max_length=50)
     password = models.CharField(max_length=20)
     type = models.CharField(max_length=20)
