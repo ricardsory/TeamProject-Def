@@ -12,7 +12,6 @@ class Rubrica(models.Model):
     e_who = models.IntegerField(default=0)
     e_when = models.IntegerField(default=timezone.now)
 
-
 class Pregunta(models.Model):
     p_enc_id = models.ForeignKey(Rubrica)
     question = models.CharField(max_length=200)
@@ -29,10 +28,16 @@ class User(models.Model):
     password = models.CharField(max_length=20)
     type = models.CharField(max_length=20)
 
+class Subject(models.Model):
+    sub_name = models.CharField(max_length=30)
+    sub_description = models.CharField(max_length=300)
+    sub_who = models.ForeignKey(User)
+
 class Project(models.Model):
     pr_name = models.CharField(max_length=30)
     pr_description = models.CharField(max_length=200)
     pr_user = models.ForeignKey(User)
+    pr_subject = models.ForeignKey(Subject)
     pr_ini_date = models.DateField(default=timezone.now)
     pr_deadline = models.DateField(default=timezone.now)
 

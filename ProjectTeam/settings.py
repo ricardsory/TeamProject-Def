@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                 'django.core.context_processors.request',
             ],
         },
     },
@@ -105,6 +106,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'projectteamadm@gmail.com'
+EMAIL_HOST_PASSWORD = 'uiouiou2008'
+DEFAULT_FROM_EMAIL = 'projectteamadm@gmail.com'
+DEFAULT_TO_EMAIL = 'projectteamadm@gmail.com'
+EMAIL_PORT = 587
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
