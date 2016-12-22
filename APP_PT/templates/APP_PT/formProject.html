@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+[
+  <!ATTLIST tag myAttri CDATA #IMPLIED>
+]>
 <html>
 <head>
     <meta charset="utf-8">
@@ -10,70 +13,168 @@
     <link href="../../static/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="../../static/css/style.css" rel="stylesheet" />
     <link href="../../static/css/main-style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../static/css/easy-autocomplete.min.css">
+    <link rel="stylesheet" href="../../static/css/easy-autocomplete.themes.min.css">
     <!-- Page-Level CSS -->
     <link href="../../static/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <script type="text/javascript" src="../../static/js/jquery.js"></script>
     <script type="text/javascript" src="../../static/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../static/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="../../static/js/typeahead.bundle.js"></script>
+    <script type="text/javascript" src="../../static/js/jquery.easy-autocomplete.min.js"></script>
 
 <script type="text/javascript">
- /*   $(document).ready(function(){
-    // Defining the local dataset
-    var cars = ['Audi', 'BMW', 'Bugatti', 'Ferrari', 'Ford', 'Lamborghini', 'Mercedes Benz', 'Porsche', 'Rolls-Royce', 'Volkswagen'];
-
-    // Constructing the suggestion engine
-    var cars = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.whitespace,
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        local: cars
-    });
-
-    // Initializing the typeahead
-    $('.typeahead').typeahead({
-        hint: true,
-        highlight: true, /* Enable substring highlighting
-        minLength: 1 /* Specify minimum characters required for showing result*/
-    /*},
-    {
-        name: 'cars',
-        source: cars
-    });
-});*/
     $(document).ready(function() {
-        var suggestions = new Bloodhound({
-            datumTokenizer: function (datum) {
-                return Bloodhound.tokenizers.whitespace(datum.value);
-            },
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                url: '/subjects',
-                filter: function (datas) {
-                    return $.map(datas, function (data) {
-                        return {
-                            value: data.sub_name,
-                        };
-                    });
-                }
-            }
-        });
+       var options = {
+        url: "subjects",
 
-        // Initialize the Bloodhound suggestion engine
-        suggestions.initialize();
-        // Instantiate the Typeahead UI
-        $('.typeahead').typeahead(null, {
-            displayKey: 'value',
-            source: suggestions.ttAdapter(),
-            templates: {
-                suggestion: " <b>{{sub_name}}</b>",
+        getValue: "name",
+
+        list: {
+            match: {
+                enabled: true
             }
-        });
+        }
+    };
+
+        $("#basics").easyAutocomplete(options);
     });
+
+    function closeAlert(){
+
+        document.getElementById("alertFieldsAct").style.display = "none";
+
+    }
+
+    function addActivity() {
+        //alert(checkData(2));
+        if (checkData(2)) {
+            var nAct = parseInt(document.getElementById("nAct").value) + 1;
+
+            var table = document.getElementById("tableActivities");
+
+            // Create an empty <tr> element and add it to the 1st position of the table:
+            var row = table.insertRow(nAct);
+
+            // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+
+            // Add some text to the new cells:
+            cell1.innerHTML = document.getElementById("actName").value + "<input type='hidden' name=actName|" + nAct + "id=actName|" + nAct + " value=" + document.getElementById("actName").value + "/>";
+            cell2.innerHTML = document.getElementById("actDesc").value + "<input type='hidden' name='actDesc|" + nAct + "' id='actDesc|" + nAct + "' value='" + document.getElementById("actDesc").value + "'>";
+            cell3.innerHTML = document.getElementById("actdatestart").value + "<input type='hidden' name='actdatestart|" + nAct + "' id='actdatestart|" + nAct + "' value='" + document.getElementById("actdatestart").value + "'>";
+            cell4.innerHTML = document.getElementById("actdateend").value + "<input type='hidden' name='actdateend|" + nAct + "' id='actdateend|" + nAct + "' value='" + document.getElementById("actdateend").value + "'>";
+            cell5.innerHTML = document.getElementById("actPerc").value + "<input type='hidden' name='actPerc|" + nAct + "' id='actPerc|" + nAct + "' value='" + document.getElementById("actPerc").value + "'>";
+            document.getElementById("nAct").value = nAct;
+            clearValues(2);
+        }
+        else {
+            document.getElementById("alertFieldsAct").style.display = "inline-block";
+        }
+    }
+    function checkData(val) {
+
+        var inputs = document.getElementsByTagName("input");
+
+        for (var i = 0; i < inputs.length; i++) {
+
+            if (inputs[i].id != "") {
+                //alert(inputs[i].id);
+                //alert(document.getElementById(inputs[i].id).getAttribute("oblig"));
+                if (document.getElementById(inputs[i].id).getAttribute("oblig") == val && document.getElementById(inputs[i].id).value == "") return false;
+
+            }
+
+        }
+
+        var textareas = document.getElementsByTagName("textarea");
+
+        for (var i = 0; i < textareas.length; i++) {
+
+            if (textareas[i].id != "") {
+                //alert(textareas[i].id);
+                //alert(document.getElementById(textareas[i].id).getAttribute("oblig"));
+                if (document.getElementById(textareas[i].id).getAttribute("oblig") == val && document.getElementById(textareas[i].id).value == "") return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
+    function clearValues(val) {
+
+        var inputs = document.getElementsByTagName("input");
+
+        for (var i = 0; i < inputs.length; i++) {
+
+            if (inputs[i].id != "") {
+                if (document.getElementById(inputs[i].id).getAttribute("oblig") == val) document.getElementById(inputs[i].id).value = "";
+
+            }
+
+        }
+
+        var textareas = document.getElementsByTagName("textarea");
+
+        for (var i = 0; i < textareas.length; i++) {
+
+            if (textareas[i].id != "") {
+                if (document.getElementById(textareas[i].id).getAttribute("oblig") == val) document.getElementById(textareas[i].id).value = "";
+
+            }
+
+        }
+
+        return true;
+
+    }
 
 </script>
 
-    <style type="text/css">
-.bs-example {
+<style type="text/css">
+
+    #message {
+    position: fixed;
+    top: 400px;
+    left: 25%;
+    width: 50%;
+    height:100px;
+    z-index:999;
+    }
+
+    #inner-message {
+        margin: 0 auto;
+    }
+       h2 {
+            font-size: 20px;
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: rgba(0, 0, 0, .3) 5px 5px 5px;
+            color: white;
+            vertical-align: middle;
+        }
+
+        hr {
+         -moz-border-bottom-colors: none;
+          -moz-border-image: none;
+          -moz-border-left-colors: none;
+          -moz-border-right-colors: none;
+          -moz-border-top-colors: none;
+          border-color: #c0c0c0;
+          border-style: solid none;
+          border-width: 1px 0;
+          margin: 5px 0;
+        }
+
+    .bs-example {
 	font-family: sans-serif;
 	position: relative;
 	margin: 100px;
@@ -124,7 +225,7 @@
 </style>
 
    </head>
-<body>
+<body style="margin-top:0px">
     <!--  wrapper -->
     <div id="wrapper">
         <!-- navbar top -->
@@ -337,21 +438,11 @@
                     </ul>
                     <!-- end dropdown-alerts -->
                 </li>
-
-                <li class="dropdown">
+                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-3x"></i>
+                        <i class="fa fa-sign-out fa-3x" onclick="signOut()"></i>
                     </a>
-                    <!-- dropdown user-->
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
-                        </li>
-                    </ul>
+                    <!-- dropdown user--
                     <!-- end dropdown-user -->
                 </li>
                 <!-- end main dropdown -->
@@ -444,7 +535,23 @@
             <!-- end sidebar-collapse -->
         </nav>
         <!-- end navbar side -->
-      <div id="page-wrapper">
+        <div class="container">
+            <div id="modalNoDataComplete" class="modal fade" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header centered color-red">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">You must fill all the activity form's fields</h4>
+                  </div>
+                  <div class="modal-body right">
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+
+      <div id="page-wrapper" style="margin-top:0px !important">
             <div class="row" >
                 <div class="col-lg-9 main-top-margin" data-scrollreveal="enter left and move 100px, wait 0.4s">
                     <h3><span class="label label-default" style="font-size:1.4em">New Project</span></h3>
@@ -459,37 +566,90 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="usr">Subject:</label>
-                                        <input type="text" class="typeahead tt-query" style="margin:0px" autocomplete="off">
+                                        <input id="basics" class="form-control"/>
                                     </div>
                                     <div class="form-group">
                                       <label for="pwd">When Start:</label>
-                                      <input type="date" class="form-control" name="datestart" id="datestart">                                    </div>
+                                      <input type="date" class="form-control" name="datestart" id="datestart" style="width:21%">                                    </div>
                                     <div class="form-group">
                                       <label for="pwd">When End:</label>
-                                      <input type="date" class="form-control" name="dateend" id="dateend">
+                                      <input type="date" class="form-control" name="dateend" id="dateend" style="width:21%">
                                     </div>
                                 </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12"><h1 style="color:black; font-size:20px"><u>Activities</u></h1></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="usr">Activity Name:</label>
-                                        <input type="text" class="form-control" id="actName" name="actName" required="required">
+                                        <input type="text" class="form-control" id="actName" name="actName" placeholder="Activity Name" oblig="2" required="required">
+                                        <input type="hidden" name="nAct" id="nAct" value="0">
                                     </div>
                                     <div class="form-group">
                                         <label for="usr">Description:</label>
-                                        <textarea name="teamSub" style="margin:0px" autocomplete="off"></textarea>
+                                        <textarea rows="7" type="text" name="actDesc" id="actDesc" class="form-control" oblig="2" required="required" placeholder="Write here the activity description..."></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="usr">Subject Percentage:</label>
-                                        <input type="number" class="typeahead tt-query" name="teamSub" style="margin:0px" autocomplete="off">
+                                        <label for="usr">Subject Percentage (%):</label>
+                                        <input type="number" class="form-control" name="actPerc" id="actPerc" min="1" max="100" oblig="2" style="width:10%">
                                     </div>
                                     <div class="form-group">
-                                      <label for="pwd">When Start:</label>
-                                      <input type="date" class="form-control" name="datestart" id="datestart">                                    </div>
+                                      <label >When Start:</label>
+                                      <input type="date" class="form-control" name="actdatestart" id="actdatestart" oblig="2" style="width:25%">                                    </div>
                                     <div class="form-group">
-                                      <label for="pwd">When End:</label>
-                                      <input type="date" class="form-control" name="dateend" id="dateend">
+                                      <label>When End:</label>
+                                      <input type="date" class="form-control" name="actdateend" id="actdateend" oblig="2" style="width:25%">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                </div>
+                                <div class="col-md-2">
+                                        <div class="form-group">
+                                            <button type="button" name="addAct" id="addAct" onclick="addActivity(); return false" class="btn btn-default" style="background-color:#80663B; color:white"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Add Activity</button>
+                                        </div>
+                                </div>
+                            </div>
+                             <div class="row"><div class="col-md-12" style="height:30px"></div></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                          <table class="table table-bordered fa-inverse" id="tableActivities" name="tableActivities" style="width:100%;">
+                                              <tr style="background-color: dimgrey">
+                                                <th style="width:30%">Activity Name</th>
+                                                <th style="width:40%">Description</th>
+                                                <th style="width:10%">When Start</th>
+                                                <th style="width:10%">When End</th>
+                                                <th style="width:5%">% Assig</th>
+                                                <th>Option</th>
+                                              </tr>
+                                            <tbody style="background-color: whitesmoke;color:darkslategray">
+                                                <tr>
+                                                    <td>
+                                                        Add Activities in this table...
+                                                    </td>
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                          </table>
                                     </div>
                                 </div>
                             </div>
@@ -513,7 +673,17 @@
             </div>
         </div>
      </div>
-</div>
+   <div id="message">
+        <div style="padding: 5px;">
+          <div class="alert alert-danger alert-dismissable fade in" id="alertFieldsAct" style="display: none;">
+            <a class="close" onclick="closeAlert()">x</a>
+            <h4 class="alert-heading"><b>WARNING!</b></h4>
+            <p>Please, fill all the <b>Activity Form Fields</b> before to add it</p>
+          </div>
+        </div>
+    </div>
+
+
     <!-- Core Scripts - Include with every page -->
 
 </body>

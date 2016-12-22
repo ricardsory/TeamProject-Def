@@ -6,7 +6,6 @@ from django.utils import timezone
 
 # Create your models here.
 
-# Create your models here.
 
 class Rubrica(models.Model):
     e_who = models.IntegerField(default=0)

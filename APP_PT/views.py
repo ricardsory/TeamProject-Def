@@ -21,6 +21,7 @@ def login(request):
                 lastname = getattr(user, 'last_name1')
                 request.session['user'] = name + ' ' + lastname
                 request.session['idUser'] = getattr(user, 'id')
+                request.session['userType'] = getattr(user, 'type')
                 return redirect('APP_PT.views.menu')
             else:
               return render_to_response('APP_PT/login.html', {'userError': '1'})
@@ -38,6 +39,13 @@ def login(request):
                     return redirect('APP_PT.views.menu')
     else:
         return render(request, 'APP_PT/login.html',{'form': form})
+
+def signout(request):
+     request.session['user'] = ""
+     request.session['idUser'] = ""
+     request.session['userType'] = ""
+     return redirect('APP_PT.views.login')
+
 
 def menu(request):
     return render(request, 'APP_PT/menu.html')

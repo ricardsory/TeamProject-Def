@@ -30,6 +30,10 @@
             }
         }
 
+        function signOut(){
+            location.href = "signOut";
+        }
+
     </script>
 
    </head>
@@ -249,18 +253,9 @@
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-3x"></i>
+                        <i class="fa fa-sign-out fa-3x" onclick="signOut()"></i>
                     </a>
-                    <!-- dropdown user-->
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
-                        </li>
-                    </ul>
+                    <!-- dropdown user--
                     <!-- end dropdown-user -->
                 </li>
                 <!-- end main dropdown -->
@@ -369,13 +364,12 @@
                 <div class="col-lg-12">
                     <div class="alert alert-info">
                         <i class="fa fa-folder-open"></i><b>&nbsp;Hello ! </b>Welcome Back <b>{{ request.sessions.user }} </b>
-                        <i class="fa  fa-pencil"></i><b>&nbsp;2,000 </b>Support Tickets Pending to Answere. nbsp;
+                        </i><b>{{ request.session.user }}</b>, here you have your options :) Enjoy
                     </div>
                 </div>
                 <!--end  Welcome -->
             </div>
-
-
+            {% if request.session.userType == 'admin' %}
             <div class="row">
                 <!--quick info section -->
                 <div class="col-lg-3">
@@ -397,12 +391,32 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="alert alert-info text-center" onclick="goTo(3)">
-                        <img src="../../static/images/icon-activities.png" />&nbsp;See my Activities
+                        <img src="../../static/images/icon-activities.png" />&nbsp;View My Activities
 
                     </div>
                 </div>
                 <!--end quick info section -->
             </div>
+            {% endif %}
+
+            {% if request.session.userType == 'user' %}
+            <div class="row">
+                <!--quick info section -->
+                <div class="col-lg-3">
+                    <div class="alert alert-info text-center" onclick="goTo(3)">
+                        <img src="../../static/images/icon-activities.png" />&nbsp;View My Activities
+
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="alert alert-info text-center" onclick="goTo(3)">
+                        <img src="../../static/images/icon-activities.png" />&nbsp;View My Pending Surveys
+
+                    </div>
+                </div>
+                <!--end quick info section -->
+            </div>
+            {% endif %}
 
             <div class="row">
                 <div class="col-lg-8">
@@ -785,15 +799,6 @@
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="assets/plugins/jquery-1.10.2.js"></script>
-    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="assets/plugins/pace/pace.js"></script>
-    <script src="assets/scripts/siminta.js"></script>
-    <!-- Page-Level Plugin Scripts-->
-    <script src="assets/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/plugins/morris/morris.js"></script>
-    <script src="assets/scripts/dashboard-demo.js"></script>
 
 </body>
 
