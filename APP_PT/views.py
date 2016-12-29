@@ -22,6 +22,7 @@ def login(request):
                 request.session['user'] = name + ' ' + lastname
                 request.session['idUser'] = getattr(user, 'id')
                 request.session['userType'] = getattr(user, 'type')
+                request.session['userEmail'] = getattr(user, 'email')
                 return redirect('APP_PT.views.menu')
             else:
               return render_to_response('APP_PT/login.html', {'userError': '1'})
@@ -49,6 +50,12 @@ def signout(request):
 
 def menu(request):
     return render(request, 'APP_PT/menu.html')
+
+def newPoll(request):
+    if request.method == "POST":
+        return render(request, 'APP_PT/menu.html')
+    else:
+        return render(request, 'APP_PT/formPoll.html')
 
 def newProject(request):
     if request.method == "POST":
@@ -105,6 +112,19 @@ def newActivity(request):
     else:
         form = CreateActivity()
     return render(request, 'APP_PT/createActivity.html', {'form': form})
+
+def editProfile(request):
+    if request.method == "POST":
+        user = User.objects.get(email=request.session["userEmail"])
+        user.first_name = request.POST.get("name")
+        user.last_name1 = request.POST.get("lastname")
+        user.birthyear = request.POST.get("birthyear")
+        user.password = request.POST.get("newpass")
+        user.save()
+        return redirect('APP_PT.views.menu')
+    else:
+        user = User.objects.get(email=request.session["userEmail"])
+        return render(request, 'APP_PT/formProfile.html', {'username' : getattr(user, 'first_name'), 'password' : getattr(user, 'password'),'lastname' : getattr(user, 'last_name1') ,'birthyear': getattr(user, 'birthyear')})
 
 def newPoll(request):
     if request.method == "POST":

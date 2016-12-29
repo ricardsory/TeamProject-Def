@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <!-- Core CSS - Include with every page -->
+    <link href="../../static/css/bootstrap.css" rel="stylesheet" />
+    <link href=../../static/font-awesome/css/font-awesome.css rel="stylesheet" />
+    <link href="../../static/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+    <link href="../../static/css/style.css" rel="stylesheet" />
+    <link href="../../static/css/main-style.css" rel="stylesheet" />
+    <!-- Page-Level CSS -->
+    <link href="../../static/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
+   </head>
+
+<script type="text/javascript">
+
+    function signOut(){
+            location.href = "signOut";
+    }
+
+    function goMenu(){
+            location.href = "/menu";
+    }
+
+    function saveProfile() {
+        if (document.getElementById("oldpass").value != document.getElementById("passold").value && document.getElementById("oldpass").value != "") {
+            alert("Old password is not correct");
+        }
+        else if (document.getElementById("newpass").value != document.getElementById("rpass").value) {
+            alert("New password bad repeated");
+        }
+        else {
+            if (document.getElementById("name").value == "" || document.getElementById("lastname").value == "" || document.getElementById("birthyear").value == "") {
+                alert("All fields are mandatory!");
+            }
+            else if (document.getElementById("oldpass").value != "" && document.getElementById("newpass").value.length < 8) {
+                alert("New password must have 8 characters atleast")
+            }
+            else {
+                document.getElementById("formProfile").submit();
+            }
+        }
+    }
+
+</script>
+    <style>
+    .vcenter {
+        display: inline-block;
+        vertical-align: middle;
+        float: none;
+    }
+
+        h1 {
+          text-shadow: 0 1px 0 #ccc,
+                       0 2px 0 #ffffff,
+                       0 3px 0 #bbb,
+                       0 4px 0 #b9b9b9,
+                       0 5px 0 #aaa,
+                       0 6px 1px rgba(0,0,0,.1),
+                       0 0 5px rgba(0,0,0,.1),
+                       0 1px 3px rgba(0,0,0,.3),
+                       0 3px 5px rgba(0,0,0,.2),
+                       0 5px 10px rgba(0,0,0,.25),
+                       0 10px 10px rgba(0,0,0,.2),
+                       0 20px 20px rgba(0,0,0,.15);
+        }
+    </style>
+
+<body>
+    <div id="wrapper">
+        <!-- navbar top -->
+<nav class="navbar navbar-fixed-top" role="navigation" id="navbar" style="background-color: black !important">
+            <!-- navbar-header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand " href="index.html">
+                    <p style="margin-top:25px;font-weight:bold;color:#FCFCFC;letter-spacing:1pt;word-spacing:1pt;font-size:21px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:0;">PROJECT TEAM</p>
+                </a>
+            </div>
+            <!-- end navbar-header -->
+            <!-- navbar-top-links -->
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- main dropdown -->
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-3x"></i>
+                    </a>
+                </li>
+
+                 <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-sign-out fa-3x" onclick="signOut()"></i>
+                    </a>
+                    <!-- dropdown user--
+                    <!-- end dropdown-user -->
+                </li>
+                <!-- end main dropdown -->
+            </ul>
+            <!-- end navbar-top-links -->
+
+        </nav>
+        <!-- end navbar top -->
+
+        <!-- navbar side -->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <!-- sidebar-collapse -->
+            <div class="sidebar-collapse">
+                <!-- side-menu -->
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <!-- user image section-->
+                        <div class="user-section">
+                            <div class="user-section-inner">
+
+                            </div>
+                            <div class="user-info">
+                                <div>{{ request.session.user }}
+                                    <span class="user-circle-online btn btn-success btn-circle user "></span>&nbsp;Online
+                                </div>
+                            </div>
+                        </div>
+                        <!--end user image section-->
+                    </li>
+                    <li class="sidebar-search">
+                        <!-- search section-->
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!--end search section-->
+                    </li>
+                    <li class="selected">
+                        <a href="/menu"><i class="fa fa-dashboard fa-fw"></i>Main Menu</a>
+                    </li>
+                    <li>
+                        <a href="/menu/newSubject"><i class="fa fa-bar-chart-o fa-fw"></i> New Subject</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/menu/newTeam">New Team</a>
+                            </li>
+                            <li>
+                                <a href="/menu/newProject">New Project</a>
+                            </li>
+                        </ul>
+                        <!-- second-level-items -->
+                    </li>
+                     <li>
+                        <a href="timeline.html"><i class="fa fa-flask fa-fw"></i>View my Activities</a>
+                    </li>
+                    <li>
+                        <a href="tables.html"><i class="fa fa-table fa-fw"></i>Tables</a>
+                    </li>
+                    <li>
+                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i>Forms</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>UI Elements<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="panels-wells.html">Panels and Wells</a>
+                            </li>
+                            <li>
+                                <a href="buttons.html">Buttons</a>
+                            </li>
+                            <li>
+                                <a href="notifications.html">Notifications</a>
+                            </li>
+                            <li>
+                                <a href="typography.html">Typography</a>
+                            </li>
+                            <li>
+                                <a href="grid.html">Grid</a>
+                            </li>
+                        </ul>
+                        <!-- second-level-items -->
+                    </li>
+                </ul>
+                <!-- end side-menu -->
+            </div>
+            <!-- end sidebar-collapse -->
+        </nav>
+        <!-- end navbar side -->
+<div id="page-wrapper">
+            <div class="row" >
+                <div class="col-lg-9 main-top-margin" data-scrollreveal="enter left and move 100px, wait 0.4s">
+                    <h1>Profile</h1>
+                    <br>
+                        <form id="formProfile" method="post">
+                             {% csrf_token %}
+                            <div class="row">
+                                <input type="hidden" name="passold" id="passold" value="{{ password }}" />
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="usr">Email:</label>
+                                        <input type="text" class="form-control" id="email" name="email" required="required" placeholder="{{ request.session.userEmail }}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usr">Name:</label>
+                                        <input type="text" class="form-control" id="name" name="name" required="required" value="{{ username }}">
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="usr">Lastname:</label>
+                                        <input type="text" class="form-control" id="lastname" name="lastname" required="required" value="{{ lastname }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usr">Birthyear:</label>
+                                        <input type="number" min="1900" max="2020" class="form-control" required="required" name="birthyear" id="birthyear" value="{{ birthyear }}">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="pwd">Old Password:</label>
+                                      <input type="password" class="form-control"  placeholder="Old Password" id="oldpass" name="oldpass">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="pwd">New Password:</label>
+                                      <input type="password" class="form-control"  placeholder="New Password" id="newpass" name="newpass">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="pwd">Repeat New Password:</label>
+                                      <input type="password" class="form-control"  placeholder="Repeat Password" id="rpass" name="rpass">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"><div class="col-md-4" style="height:50px"></div></div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <button name="accept" id="accept" type="button" class="btn btn-success" onclick="saveProfile()">Save</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <button name="cancel" id="cancel" type="button" class="btn btn-danger" onclick="goMenu()">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                </div>
+            </div>
+
+    <!-- Core Scripts - Include with every page -->
+    <script src="assets/plugins/jquery-1.10.2.js"></script>
+    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="assets/plugins/pace/pace.js"></script>
+    <script src="assets/scripts/siminta.js"></script>
+    <!-- Page-Level Plugin Scripts-->
+    <script src="assets/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="assets/plugins/morris/morris.js"></script>
+    <script src="assets/scripts/dashboard-demo.js"></script>
+
+</body>
+
+</html>
