@@ -24,24 +24,52 @@
             location.href = "/menu";
     }
 
-    function saveProfile() {
-        if (document.getElementById("oldpass").value != document.getElementById("passold").value && document.getElementById("oldpass").value != "") {
-            alert("Old password is not correct");
-        }
-        else if (document.getElementById("newpass").value != document.getElementById("rpass").value) {
-            alert("New password bad repeated");
+    function savePoll() {
+        if (document.getElementById("nQ").value >= 2) {
+            document.getElementById("formPoll").submit();
         }
         else {
-            if (document.getElementById("name").value == "" || document.getElementById("lastname").value == "" || document.getElementById("birthyear").value == "") {
-                alert("All fields are mandatory!");
-            }
-            else if (document.getElementById("oldpass").value != "" && document.getElementById("newpass").value.length < 8) {
-                alert("New password must have 8 characters atleast")
-            }
-            else {
-                document.getElementById("formProfile").submit();
-            }
+            alert("To create a poll atleast you must add 5 questions!")
         }
+    }
+
+    function addQuestion() {
+        if (document.getElementById("question").value == "") {
+            alert("You must introduce a question!");
+        }
+        else {
+            var nQ = parseInt(document.getElementById("nQ").value) + 1;
+
+            var table = document.getElementById("tq");
+
+            // Create an empty <tr> element and add it to the 1st position of the table:
+            var row = table.insertRow(nQ);
+
+            // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+
+            // Add some text to the new cells:
+            cell2.innerHTML = document.getElementById("question").value + "<input type='hidden' name=question|" + nQ + " id=question|" + nQ + " value=" + document.getElementById("question").value + ">";
+            if (document.getElementById("type").value == 1) {
+                cell3.innerHTML = "Mark 1-10<input type='hidden' name=type|" + nQ + " id=type|" + nQ + " value='" + document.getElementById("type").value + "'>";
+             }
+            else {
+                cell3.innerHTML = "Free Answer<input type='hidden' name=type|" + nQ + " id=type|" + nQ + " value='" + document.getElementById("type").value + "'>";
+            }
+            document.getElementById("nQ").value = nQ;
+            clearValues(1);
+        }
+    }
+
+    function clearValues(id) {
+
+        if (id == 1) {
+            document.getElementById("question").value = "";
+            document.getElementById("type").value = 1;
+        }
+
     }
 
 </script>
@@ -194,55 +222,80 @@
         <!-- end navbar side -->
 <div id="page-wrapper">
             <div class="row" >
+               <div class="row" >
                 <div class="col-lg-9 main-top-margin" data-scrollreveal="enter left and move 100px, wait 0.4s">
-                    <h1>Profile</h1>
+                    <h3><span class="label label-default" style="font-size:1.4em">Create a Poll</span></h3>
                     <br>
-                        <form id="formProfile" method="post">
+                        <form id="formPoll" method="post">
                              {% csrf_token %}
                             <div class="row">
-                                <input type="hidden" name="passold" id="passold" value="{{ password }}" />
+                                <input type="hidden" name="nQ" id="nQ" value="0" />
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="usr">Email:</label>
-                                        <input type="text" class="form-control" id="email" name="email" required="required" placeholder="{{ request.session.userEmail }}" readonly>
+                                        <label for="usr">Question:</label>
+                                        <input type="text" class="form-control" id="question" name="question" required="required" placeholder="Question">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="usr">Name:</label>
-                                        <input type="text" class="form-control" id="name" name="name" required="required" value="{{ username }}">
-                                    </div>
-                                     <div class="form-group">
-                                        <label for="usr">Lastname:</label>
-                                        <input type="text" class="form-control" id="lastname" name="lastname" required="required" value="{{ lastname }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="usr">Birthyear:</label>
-                                        <input type="number" min="1900" max="2020" class="form-control" required="required" name="birthyear" id="birthyear" value="{{ birthyear }}">
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="pwd">Old Password:</label>
-                                      <input type="password" class="form-control"  placeholder="Old Password" id="oldpass" name="oldpass">
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="pwd">New Password:</label>
-                                      <input type="password" class="form-control"  placeholder="New Password" id="newpass" name="newpass">
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="pwd">Repeat New Password:</label>
-                                      <input type="password" class="form-control"  placeholder="Repeat Password" id="rpass" name="rpass">
+                                    <div class="form-group col-md-4" style="margin-left:-15px">
+                                        <label for="usr">Type:</label>
+                                          <select class="form-control" id="type">
+                                            <option value="1">Mark 1-10</option>
+                                            <option value="2">Free Answer</option>
+                                          </select>
                                     </div>
                                 </div>
                             </div>
+                             <div class="row">
+                                <div class="col-md-10">
+                                </div>
+                                <div class="col-md-2">
+                                        <div class="form-group">
+                                            <button type="button" name="addQ" id="addQ" onclick="addQuestion(); return false" class="btn btn-default" style="background-color:#80663B; color:white"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Add Question</button>
+                                        </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12"><h1 style="color:black; font-size:20px"><u>Questions</u></h1></div>
+                            </div>
+                            <div class="row"><div class="col-md-12" style="height:30px"></div></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                          <table class="table table-bordered fa-inverse" id="tq" name="tq" style="width:100%;">
+                                              <tr style="background-color: dimgrey">
+                                                <th style="width:10%">Option</th>
+                                                <th style="width:60%">Question</th>
+                                                <th style="width:30%">Type</th>
+                                              </tr>
+                                            <tbody style="background-color: whitesmoke;color:darkslategray">
+                                                <tr>
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                    <td>
+                                                        Add Questions in this table...
+                                                    </td>
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                          </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                             <div class="row"><div class="col-md-4" style="height:50px"></div></div>
                             <div class="row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <button name="accept" id="accept" type="button" class="btn btn-success" onclick="saveProfile()">Save</button>
+                                        <button name="accept" style="width:100px" id="accept" type="button" class="btn btn-success" onclick="savePoll()">Save</button>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <button name="cancel" id="cancel" type="button" class="btn btn-danger" onclick="goMenu()">Cancel</button>
+                                        <button name="cancel" style="width:100px" id="cancel" type="button" class="btn btn-danger" onclick="goMenu()">Cancel</button>
                                     </div>
                                 </div>
                             </div>

@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils import timezone
+import datetime
 
 
 # Create your models here.
@@ -9,11 +10,12 @@ from django.utils import timezone
 
 class Rubrica(models.Model):
     e_who = models.IntegerField(default=0)
-    e_when = models.IntegerField(default=timezone.now)
+    e_when = models.DateField(default=datetime.datetime.now, blank=True)
 
 class Pregunta(models.Model):
     p_enc_id = models.ForeignKey(Rubrica)
     question = models.CharField(max_length=200)
+    type = models.IntegerField(default=1)
 
 class Opcion(models.Model):
     o_preg_id = models.ForeignKey(Pregunta)

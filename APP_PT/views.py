@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-from .models import User, Actividad, Project, Subject
+from .models import User, Actividad, Project, Subject, Pregunta, Rubrica
 from .forms import CreateAccount, CreateProject, CreateActivity, CreatePoll, Login
 from django.shortcuts import redirect
 from django.core.mail import send_mail
@@ -7,6 +7,7 @@ from django.conf import settings
 import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from django.utils import timezone
 
 
 # Create your views here.
@@ -50,12 +51,6 @@ def signout(request):
 
 def menu(request):
     return render(request, 'APP_PT/menu.html')
-
-def newPoll(request):
-    if request.method == "POST":
-        return render(request, 'APP_PT/menu.html')
-    else:
-        return render(request, 'APP_PT/formPoll.html')
 
 def newProject(request):
     if request.method == "POST":
@@ -128,18 +123,14 @@ def editProfile(request):
 
 def newPoll(request):
     if request.method == "POST":
-        form = CreatePoll(request.POST)
-        if form.is_valid():
-            poll = form.save(commit=False)
-            id = poll.save()
-            i = 0
-            while i < request.POST.get('nquestions', 0):
-                question = form.save(commit=False)
-                question.question = request.POST.get('nquestions' + i, '')
-                i = i + 1
-                question.p_enc_id = id
-
-            return redirect('APP_PT.views.login')
+        for input in request.POST.keys():
+            if input == "nQ":
+                nQ = int(request.POST.get(input))
+                poll = Rubrica(e_who=request.session['idUser'],e_when=timezone.now())
+                poll.save()
+                for x in range(1, nQ+1):
+                    question = Pregunta(question=request.POST.get("question|" + str(x)), type=request.POST.get("type|" + str(x)), p_enc_id=poll)
+                    question.save()
+        return redirect('APP_PT.views.menu')
     else:
-        form = CreateActivity()
-    return render(request, 'APP_PT/createActivity.html', {'form': form})
+        return render(request, 'APP_PT/formPoll.html')
