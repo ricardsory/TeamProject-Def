@@ -28,6 +28,7 @@ class User(models.Model):
     email = models.CharField(max_length=50)
     password = models.CharField(max_length=20)
     type = models.CharField(max_length=20)
+    disable = models.IntegerField(default=False)
 
 class Subject(models.Model):
     sub_name = models.CharField(max_length=30)
@@ -41,6 +42,10 @@ class Project(models.Model):
     pr_subject = models.ForeignKey(Subject)
     pr_ini_date = models.DateField(default=timezone.now)
     pr_deadline = models.DateField(default=timezone.now)
+
+class RubricaProject(models.Model):
+    rp_project = models.ForeignKey(Subject)
+    rp_rubrica = models.ForeignKey(Rubrica)
 
 class Actividad(models.Model):
     ac_name = models.CharField(max_length=30)

@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-from .models import User, Actividad, Project, Subject, Pregunta, Rubrica
+from .models import User, Actividad, Project, Subject, Pregunta, Rubrica, RubricaProject
 from .forms import CreateAccount, CreateProject, CreateActivity, CreatePoll, Login
 from django.shortcuts import redirect
 from django.core.mail import send_mail
@@ -16,7 +16,7 @@ def login(request):
     form = Login()
     if request.method == "POST":
         if request.POST.get("hlogin") == '1':
-            if User.objects.filter(email=request.POST.get("lemail")).filter(password=request.POST.get("lpass")):
+            if User.objects.filter(email=request.POST.get("lemail")).filter(password=request.POST.get("lpass")).filter(disable=False):
                 user = User.objects.get(email=request.POST.get("lemail"))
                 name = getattr(user, 'first_name')
                 lastname = getattr(user, 'last_name1')
@@ -134,3 +134,19 @@ def newPoll(request):
         return redirect('APP_PT.views.menu')
     else:
         return render(request, 'APP_PT/formPoll.html')
+
+def disable(request):
+    user = User.objects.get(email=request.session["userEmail"])
+    user.disable = True
+    user.save()
+    return redirect('APP_PT.views.signout')
+
+def evaluateActivity(request):
+    if request.method == "POST":
+        return
+    else:
+        idProject = request.GET.get('idProject')
+        rp = RubricaProject.objects.get(rp_project_id=idProject)
+        rubrica = Rubrica.objects.get(id=rp.rp_rubrica_id)
+        questions = Pregunta.objects.filter(p_enc_id=rubrica.id)
+        return render(request, 'APP_PT/evaluatePoll.html',{'questions': questions})
