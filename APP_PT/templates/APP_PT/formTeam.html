@@ -44,7 +44,7 @@
 
 $(document).ready(function() {
    var options = {
-	url: "subjects",
+	url: "students",
 
 	getValue: "name",
 
@@ -61,6 +61,43 @@ $(document).ready(function() {
     function signOut(){
             location.href = "signOut";
     }
+
+    function goMenu(){
+            location.href = "/menu";
+    }
+
+    function addStudent() {
+        //alert(checkData(2));
+        if (document.getElementById("basics").value != "") {
+            var nStud = parseInt(document.getElementById("nStud").value) + 1;
+
+            var table = document.getElementById("tableStudents");
+
+            // Create an empty <tr> element and add it to the 1st position of the table:
+            var row = table.insertRow(nStud);
+
+            row.id = "tr" + nStud;
+
+            // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+
+            // Add some text to the new cells:
+            cell1.style = "text-align:center";
+            cell1.innerHTML = "<span class='glyphicon glyphicon-trash' aria-hidden='true' style='cursor:pointer' onclick='deleteStudent(" + nStud + ")'></span>";
+            cell2.innerHTML = document.getElementById("basics").value + "<input type='hidden' name=sName|" + nStud + " id=sName|" + nStud + " value=" + document.getElementById("basics").value + "/>";
+            document.getElementById("nStud").value = nStud;
+            document.getElementById("basics").value = "";
+        }
+        else {
+            alert("Please, you must indicate the Student to add")
+        }
+    }
+
+    function deleteStudent(id) {
+        document.getElementById("tr" + id).parentNode.removeChild(document.getElementById("tr" + id));
+    }
+
 
 </script>
 
@@ -169,7 +206,7 @@ $(document).ready(function() {
 <body>
     <!--  wrapper -->
     <div id="wrapper">
-        <!-- navbar top -->
+               <!-- navbar top -->
         <nav class="navbar navbar-fixed-top" role="navigation" id="navbar" style="background-color: black !important">
             <!-- navbar-header -->
             <div class="navbar-header">
@@ -187,197 +224,11 @@ $(document).ready(function() {
             <!-- navbar-top-links -->
             <ul class="nav navbar-top-links navbar-right">
                 <!-- main dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="top-label label label-danger">3</span><i class="fa fa-envelope fa-3x"></i>
-                    </a>
-                    <!-- dropdown-messages -->
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong><span class=" label label-danger">Andrew Smith</span></strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong><span class=" label label-info">Jonney Depp</span></strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong><span class=" label label-success">Jonney Depp</span></strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- end dropdown-messages -->
-                </li>
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="top-label label label-success">4</span>  <i class="fa fa-tasks fa-3x"></i>
+                        <i class="fa fa-user fa-3x"></i>
                     </a>
-                    <!-- dropdown tasks -->
-                    <ul class="dropdown-menu dropdown-tasks">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 1</strong>
-                                        <span class="pull-right text-muted">40% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 2</strong>
-                                        <span class="pull-right text-muted">20% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 3</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 4</strong>
-                                        <span class="pull-right text-muted">80% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            <span class="sr-only">80% Complete (danger)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Tasks</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- end dropdown-tasks -->
-                </li>
-
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="top-label label label-warning">5</span>  <i class="fa fa-bell fa-3x"></i>
-                    </a>
-                    <!-- dropdown alerts-->
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i>New Comment
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i>3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i>Message Sent
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-tasks fa-fw"></i>New Task
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i>Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- end dropdown-alerts -->
                 </li>
 
                  <li class="dropdown">
@@ -478,20 +329,25 @@ $(document).ready(function() {
             <div class="row" >
                 <div class="col-lg-9 main-top-margin" data-scrollreveal="enter left and move 100px, wait 0.4s">
                     <div id="container_title">
-    	                <h2>New Team</h2>
+    	                <h3><span class="label label-default" style="font-size:1.4em">New Team</span></h3>
                     </div>
                     <br>
-                        <form method="post">
+                        <form method="post" id="formStudent">
+                            <input type="hidden" id="nStud" name="nStud" value="0" />
                              {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="usr">Team Name:</label>
-                                        <input type="text" class="form-control" id="teamName" name="teamName" required="required">
+                                        <input type="text" class="form-control" id="teamName" name="teamName" required="required" style="width:40%">
                                     </div>
-                                    <div class="form-group">
+                                   <div class="form-group">
                                         <label for="usr">Project:</label>
-                                        <input id="basics" class="form-control"/>
+                                        <select class="form-control" id="project" name="project" style="width:21%">
+                                        {% for project in projects %}
+                                        <option value="{{ project.id }}">{{ project.pr_name }}</option>
+                                        {% endfor %}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -506,10 +362,10 @@ $(document).ready(function() {
                                         <input id="basics" class="form-control"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6"></div>
+                                <div class="col-md-7"></div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <button name="accept" id="accept" type="submit" class="btn btn-default">Add</button>
+                                        <button name="accept" id="accept" type="button" onclick="addStudent()" class="btn btn-default">Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -517,18 +373,18 @@ $(document).ready(function() {
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                          <table class="table table-bordered fa-inverse" id="tableStudents" name="tableStudents" style="width:100%;">
+                                          <table class="table table-bordered fa-inverse" id="tableStudents" name="tableStudents" style="width:50%;">
                                               <tr style="background-color: dimgrey">
-                                                <th style="width:80%">Student Name</th>
                                                 <th>Option</th>
+                                                <th style="width:80%">Student Name</th>
                                               </tr>
                                             <tbody style="background-color: whitesmoke;color:darkslategray">
                                                 <tr>
                                                     <td>
-                                                        Add Student here...
+                                                        -
                                                     </td>
                                                     <td>
-                                                        -
+                                                        Add Student here...
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -538,7 +394,7 @@ $(document).ready(function() {
                             </div>
                             <div class="row"><div class="col-md-12" style="height:70px"></div></div>
                             <div class="row">
-                                <div class="col-md-4"></div>
+                                <div class="col-md-2"></div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <button name="accept" id="accept" type="submit" class="btn btn-success">Accept</button>

@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65a03c0f-45c2-4bee-8e9b-7f542acbd0aa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/APP_PT/templates/APP_PT/evaluatePoll.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP_PT/models.py" afterPath="$PROJECT_DIR$/APP_PT/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP_PT/templates/APP_PT/formProfile.html" afterPath="$PROJECT_DIR$/APP_PT/templates/APP_PT/formProfile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP_PT/templates/APP_PT/formProject.html" afterPath="$PROJECT_DIR$/APP_PT/templates/APP_PT/formProject.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP_PT/templates/APP_PT/formTeam.html" afterPath="$PROJECT_DIR$/APP_PT/templates/APP_PT/formTeam.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP_PT/templates/APP_PT/menu.html" afterPath="$PROJECT_DIR$/APP_PT/templates/APP_PT/menu.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APP_PT/views.py" afterPath="$PROJECT_DIR$/APP_PT/views.py" />
     </list>
     <ignored path="ProjectTeam.iws" />
@@ -34,10 +35,25 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/APP_PT/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.269231">
-              <caret line="151" column="81" selection-start-line="151" selection-start-column="81" selection-end-line="151" selection-end-column="81" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="57" column="32" selection-start-line="57" selection-start-column="32" selection-end-line="57" selection-end-column="32" />
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/menu.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5928144">
+              <caret line="237" column="51" selection-start-line="237" selection-start-column="51" selection-end-line="237" selection-end-column="51" />
+              <folding>
+                <element signature="n#style#0;n#div#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -47,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/APP_PT/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="12" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="12" />
+              <caret line="39" column="18" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="18" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -55,11 +71,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="evaluatePoll.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/evaluatePoll.html">
+      <file leaf-file-name="formProject.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formProject.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.75555557">
-              <caret line="262" column="179" selection-start-line="262" selection-start-column="179" selection-end-line="262" selection-end-column="179" />
+            <state vertical-scroll-proportion="-5.8846154">
+              <caret line="62" column="159" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="159" />
+              <folding>
+                <element signature="n#style#0;n#input#0;n#div#3;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#4;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="formTeam.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formTeam.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.5384617">
+              <caret line="70" column="53" selection-start-line="70" selection-start-column="53" selection-end-line="70" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -68,11 +97,19 @@
       <file leaf-file-name="formProfile.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formProfile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.5384617">
-              <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="208" column="105" selection-start-line="208" selection-start-column="21" selection-end-line="208" selection-end-column="105" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="evaluatePoll.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/evaluatePoll.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="243" column="139" selection-start-line="243" selection-start-column="47" selection-end-line="243" selection-end-column="139" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -80,30 +117,8 @@
       <file leaf-file-name="formPoll.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formPoll.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.576923">
-              <caret line="242" column="51" selection-start-line="239" selection-start-column="42" selection-end-line="242" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="formProject.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formProject.html">
-          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="77" column="27" selection-start-line="55" selection-start-column="12" selection-end-line="77" selection-end-column="27" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/APP_PT/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.88">
-              <caret line="38" column="55" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
+              <caret line="242" column="51" selection-start-line="239" selection-start-column="42" selection-end-line="242" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -113,17 +128,7 @@
         <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/login.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="143" column="132" selection-start-line="143" selection-start-column="40" selection-end-line="143" selection-end-column="132" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="menu.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/menu.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+              <caret line="131" column="134" selection-start-line="131" selection-start-column="129" selection-end-line="131" selection-end-column="134" />
               <folding />
             </state>
           </provider>
@@ -166,18 +171,18 @@
         <option value="$PROJECT_DIR$/APP_PT/static/js/tokenizers.js" />
         <option value="$PROJECT_DIR$/APP_PT/static/js/typeahead.bundle.js" />
         <option value="$PROJECT_DIR$/ProjectTeam/settings.py" />
-        <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/login.html" />
-        <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/formTeam.html" />
         <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/formSubject.html" />
-        <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/menu.html" />
-        <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/formProject.html" />
         <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/formPoll.html" />
         <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/formProfile.html" />
-        <option value="$PROJECT_DIR$/APP_PT/urls.py" />
         <option value="$PROJECT_DIR$/APP_PT/migrations/0017_user_disable.py" />
-        <option value="$PROJECT_DIR$/APP_PT/models.py" />
-        <option value="$PROJECT_DIR$/APP_PT/views.py" />
         <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/evaluatePoll.html" />
+        <option value="$PROJECT_DIR$/APP_PT/urls.py" />
+        <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/login.html" />
+        <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/formTeam.html" />
+        <option value="$PROJECT_DIR$/APP_PT/models.py" />
+        <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/formProject.html" />
+        <option value="$PROJECT_DIR$/APP_PT/views.py" />
+        <option value="$PROJECT_DIR$/APP_PT/templates/APP_PT/menu.html" />
       </list>
     </option>
   </component>
@@ -217,7 +222,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -307,6 +311,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -677,7 +682,13 @@
       <option name="project" value="LOCAL" />
       <updated>1483148550440</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="EIGHT COMMIT">
+      <created>1483399088209</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1483399088209</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -701,13 +712,13 @@
     <frame x="1" y="1" width="1364" height="726" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21975498" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22588055" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864675" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2759227" sideWeight="0.11026034" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2759227" sideWeight="0.12633997" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2759227" sideWeight="0.8897397" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2759227" sideWeight="0.87366" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -771,6 +782,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/APP_PT/static/fonts/codropsicons/license.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1026,26 +1045,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formTeam.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="4" selection-start-line="60" selection-start-column="4" selection-end-line="62" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/createPoll.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.3809524">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="143" column="132" selection-start-line="143" selection-start-column="40" selection-end-line="143" selection-end-column="132" />
           <folding />
         </state>
       </provider>
@@ -1058,56 +1061,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/menu.html">
+    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formPoll.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+          <caret line="242" column="51" selection-start-line="239" selection-start-column="42" selection-end-line="242" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formProject.html">
+    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/evaluatePoll.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="27" selection-start-line="55" selection-start-column="12" selection-end-line="77" selection-end-column="27" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#4;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formProfile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.5384617">
-          <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+          <caret line="243" column="139" selection-start-line="243" selection-start-column="47" selection-end-line="243" selection-end-column="139" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APP_PT/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.88">
-          <caret line="38" column="55" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
+        <state vertical-scroll-proportion="-12.72">
+          <caret line="39" column="71" selection-start-line="39" selection-start-column="71" selection-end-line="39" selection-end-column="71" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formPoll.html">
+    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.576923">
-          <caret line="242" column="51" selection-start-line="239" selection-start-column="42" selection-end-line="242" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="131" column="134" selection-start-line="131" selection-start-column="129" selection-end-line="131" selection-end-column="134" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formProfile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="208" column="105" selection-start-line="208" selection-start-column="21" selection-end-line="208" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formTeam.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.5384617">
+          <caret line="70" column="53" selection-start-line="70" selection-start-column="53" selection-end-line="70" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/APP_PT/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.269231">
-          <caret line="151" column="81" selection-start-line="151" selection-start-column="81" selection-end-line="151" selection-end-column="81" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="32" selection-start-line="57" selection-start-column="32" selection-end-line="57" selection-end-column="32" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/formProject.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.8846154">
+          <caret line="62" column="159" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="159" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#div#3;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#4;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1115,18 +1133,23 @@
     <entry file="file://$PROJECT_DIR$/APP_PT/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="12" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="12" />
+          <caret line="39" column="18" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="18" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/evaluatePoll.html">
+    <entry file="file://$PROJECT_DIR$/APP_PT/templates/APP_PT/menu.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75555557">
-          <caret line="262" column="179" selection-start-line="262" selection-start-column="179" selection-end-line="262" selection-end-column="179" />
-          <folding />
+        <state vertical-scroll-proportion="0.5928144">
+          <caret line="237" column="51" selection-start-line="237" selection-start-column="51" selection-end-line="237" selection-end-column="51" />
+          <folding>
+            <element signature="n#style#0;n#div#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

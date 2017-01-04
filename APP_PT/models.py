@@ -56,7 +56,7 @@ class Actividad(models.Model):
     ac_projectID = models.ForeignKey(Project)
 
 class Equipo(models.Model):
-    eq_projectID = models.ForeignKey(Pregunta)
+    eq_projectID = models.ForeignKey(Project)
     eq_name = models.CharField(max_length=30)
 
 class Participante(models.Model):

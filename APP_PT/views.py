@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-from .models import User, Actividad, Project, Subject, Pregunta, Rubrica, RubricaProject
+from .models import User, Actividad, Project, Subject, Pregunta, Rubrica, RubricaProject, Equipo
 from .forms import CreateAccount, CreateProject, CreateActivity, CreatePoll, Login
 from django.shortcuts import redirect
 from django.core.mail import send_mail
@@ -32,7 +32,7 @@ def login(request):
                 if User.objects.filter(email=request.POST.get("remail")):
                     return render_to_response('APP_PT/login.html', {'userError': '2'})
                 else:
-                    user = User(first_name=request.POST.get("rname"), email=request.POST.get("remail"), password=request.POST.get("rpass"),birthyear=request.POST.get("ryear"), type="user")
+                    user = User(first_name=request.POST.get("rname"), last_name1=request.POST.get("lname"), email=request.POST.get("remail"), password=request.POST.get("rpass"),birthyear=request.POST.get("ryear"), type="user")
                     user.save()
                     subject = '[Team Project] Welcome to Team Project '
                     message = 'Thanks to be confidence with us. Enjoy your expirience with us. Project Team is a web application based on manage & evaluate projects.'
@@ -50,25 +50,54 @@ def signout(request):
 
 
 def menu(request):
-    return render(request, 'APP_PT/menu.html')
+    projects = Project.objects.filter(pr_user_id=request.session["idUser"])
+    subjects = Subject.objects.filter(sub_who=request.session['idUser'])
+    return render(request, 'APP_PT/menu.html', {'projects': projects, 'subjects': subjects})
 
 def newProject(request):
     if request.method == "POST":
-        return render(request, 'APP_PT/menu.html')
+        user = User.objects.get(id=request.session["idUser"])
+        subject = Subject.objects.get(id=request.POST.get("subject"))
+        project = Project(pr_name=request.POST.get("projectName"), pr_description=request.POST.get("projectDesc"), pr_ini_date=request.POST.get("datestart"), pr_deadline=request.POST.get("dateend"),pr_subject=subject,pr_user=user)
+        project.save()
+        for input in request.POST.keys():
+            if input == "nAct":
+                nAct = int(request.POST.get(input))
+                for x in range(1, nAct+1):
+                    if "actName|" + str(x) in request.POST:
+                        activity = Actividad(ac_name=request.POST.get("actName|" + str(x)),ac_description=request.POST.get("actDesc|" + str(x)),ac_percentage=request.POST.get("actPerc|" + str(x)),ac_ini_date=request.POST.get("actdatestart|" + str(x)),ac_deadline=request.POST.get("actdateend|" + str(x)),ac_projectID=project)
+                        activity.save()
+        return redirect('APP_PT.views.menu')
     else:
-        return render(request, 'APP_PT/formProject.html')
+        subjects = Subject.objects.filter(sub_who=request.session['idUser'])
+        return render(request, 'APP_PT/formProject.html', {'subjects': subjects})
 
 def newTeam(request):
     if request.method == "POST":
-        return render(request, 'APP_PT/menu.html')
+        for input in request.POST.keys():
+            if input == "nStud":
+                nStud = int(request.POST.get(input))
+                project = Project.objects.get(id=request.POST.get("project"))
+                equipo = Equipo(eq_name=request.POST.get("teamName"),eq_projectID=project)
+                equipo.save()
+                for x in range(1, nStud+1):
+                    if "question|" + str(x) in request.POST:
+                        question = Pregunta(question=request.POST.get("question|" + str(x)), type=request.POST.get("type|" + str(x)), p_enc_id=poll)
+                        question.save()
+        return redirect('APP_PT.views.menu')
     else:
-        return render(request, 'APP_PT/formTeam.html')
+        projects = Project.objects.filter(pr_user=request.session['idUser'])
+        return render(request, 'APP_PT/formTeam.html', {'projects': projects})
 
 def subjects(request):
     subjects = Subject.objects.all()
     listsubjects = [{ 'name' : subject.sub_name } for subject in subjects ]
     return HttpResponse(json.dumps(listsubjects), content_type="application/json")
 
+def students(request):
+    students = User.objects.filter(type="user")
+    liststudents = [{ 'name' : student.first_name + " " + student.last_name1} for student in students ]
+    return HttpResponse(json.dumps(liststudents), content_type="application/json")
 
 def newSubject(request):
     if request.method == "POST":

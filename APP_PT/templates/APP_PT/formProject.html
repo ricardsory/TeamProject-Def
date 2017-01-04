@@ -28,21 +28,9 @@
             location.href = "signOut";
     }
 
-    $(document).ready(function() {
-       var options = {
-        url: "subjects",
-
-        getValue: "name",
-
-        list: {
-            match: {
-                enabled: true
-            }
-        }
-    };
-
-        $("#basics").easyAutocomplete(options);
-    });
+    function goMenu(){
+            location.href = "/menu";
+    }
 
     function closeAlert(){
 
@@ -60,6 +48,8 @@
             // Create an empty <tr> element and add it to the 1st position of the table:
             var row = table.insertRow(nAct);
 
+            row.id = "tr" + nAct;
+
             // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
@@ -69,18 +59,29 @@
             var cell6 = row.insertCell(5);
 
             // Add some text to the new cells:
-            cell1.innerHTML = document.getElementById("actName").value + "<input type='hidden' name=actName|" + nAct + "id=actName|" + nAct + " value=" + document.getElementById("actName").value + "/>";
-            cell2.innerHTML = document.getElementById("actDesc").value + "<input type='hidden' name='actDesc|" + nAct + "' id='actDesc|" + nAct + "' value='" + document.getElementById("actDesc").value + "'>";
-            cell3.innerHTML = document.getElementById("actdatestart").value + "<input type='hidden' name='actdatestart|" + nAct + "' id='actdatestart|" + nAct + "' value='" + document.getElementById("actdatestart").value + "'>";
-            cell4.innerHTML = document.getElementById("actdateend").value + "<input type='hidden' name='actdateend|" + nAct + "' id='actdateend|" + nAct + "' value='" + document.getElementById("actdateend").value + "'>";
-            cell5.innerHTML = document.getElementById("actPerc").value + "<input type='hidden' name='actPerc|" + nAct + "' id='actPerc|" + nAct + "' value='" + document.getElementById("actPerc").value + "'>";
+            cell1.style = "text-align:center";
+            cell1.innerHTML = "<span class='glyphicon glyphicon-trash' aria-hidden='true' style='cursor:pointer' onclick='deleteActivity(" + nAct + ")'></span>";
+            cell2.innerHTML = document.getElementById("actName").value + "<input type='hidden' name=actName|" + nAct + " id=actName|" + nAct + " value=" + document.getElementById("actName").value + "/>";
+            cell3.innerHTML = document.getElementById("actDesc").value + "<input type='hidden' name='actDesc|" + nAct + "' id='actDesc|" + nAct + "' value='" + document.getElementById("actDesc").value + "'>";
+            cell4.innerHTML = document.getElementById("actdatestart").value + "<input type='hidden' name='actdatestart|" + nAct + "' id='actdatestart|" + nAct + "' value='" + document.getElementById("actdatestart").value + "'>";
+            cell5.innerHTML = document.getElementById("actdateend").value + "<input type='hidden' name='actdateend|" + nAct + "' id='actdateend|" + nAct + "' value='" + document.getElementById("actdateend").value + "'>";
+            cell6.innerHTML = document.getElementById("actPerc").value + "<input type='hidden' name='actPerc|" + nAct + "' id='actPerc|" + nAct + "' value='" + document.getElementById("actPerc").value + "'>";
             document.getElementById("nAct").value = nAct;
+            document.getElementById("totalPerc").value = parseInt(document.getElementById("totalPerc").value) + parseInt(document.getElementById("actPerc").value);
+            document.getElementById("spanTotal").innerHTML = document.getElementById("totalPerc").value;
             clearValues(2);
         }
         else {
             document.getElementById("alertFieldsAct").style.display = "inline-block";
         }
     }
+
+    function deleteActivity(id) {
+        document.getElementById("totalPerc").value = parseInt(document.getElementById("totalPerc").value) - parseInt(document.getElementById("actPerc|" + id).value);
+        document.getElementById("spanTotal").innerHTML = document.getElementById("totalPerc").value;
+        document.getElementById("tr" + id).parentNode.removeChild(document.getElementById("tr" + id));
+    }
+
     function checkData(val) {
 
         var inputs = document.getElementsByTagName("input");
@@ -139,6 +140,25 @@
 
         return true;
 
+    }
+
+    function checkNumber() {
+        if (document.getElementById("actPerc").value < 0 || document.getElementById("actPerc").value > 100) {
+            document.getElementById("actPerc").value = "";
+            alert("Percentage must be between 0 and 100!");
+        }
+    }
+
+    function saveProject() {
+        if (document.getElementById("projectName").value == "" || document.getElementById("projectDesc").value == "" || document.getElementById("datestart").value == "" || document.getElementById("dateend").value == "") {
+            alert("All project fields are mandatory!")
+        }
+        else if (parseInt(document.getElementById("totalPerc").value ) != 100) {
+            alert("Total percentage for the subjects must be 100");
+        }
+        else {
+            document.getElementById("formProject").submit();
+        }
     }
 
 </script>
@@ -234,7 +254,7 @@
 <body style="margin-top:0px">
     <!--  wrapper -->
     <div id="wrapper">
-        <!-- navbar top -->
+       <!-- navbar top -->
         <nav class="navbar navbar-fixed-top" role="navigation" id="navbar" style="background-color: black !important">
             <!-- navbar-header -->
             <div class="navbar-header">
@@ -252,198 +272,13 @@
             <!-- navbar-top-links -->
             <ul class="nav navbar-top-links navbar-right">
                 <!-- main dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="top-label label label-danger">3</span><i class="fa fa-envelope fa-3x"></i>
-                    </a>
-                    <!-- dropdown-messages -->
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong><span class=" label label-danger">Andrew Smith</span></strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong><span class=" label label-info">Jonney Depp</span></strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong><span class=" label label-success">Jonney Depp</span></strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- end dropdown-messages -->
-                </li>
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="top-label label label-success">4</span>  <i class="fa fa-tasks fa-3x"></i>
+                        <i class="fa fa-user fa-3x"></i>
                     </a>
-                    <!-- dropdown tasks -->
-                    <ul class="dropdown-menu dropdown-tasks">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 1</strong>
-                                        <span class="pull-right text-muted">40% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 2</strong>
-                                        <span class="pull-right text-muted">20% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 3</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 4</strong>
-                                        <span class="pull-right text-muted">80% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            <span class="sr-only">80% Complete (danger)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Tasks</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- end dropdown-tasks -->
                 </li>
 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="top-label label label-warning">5</span>  <i class="fa fa-bell fa-3x"></i>
-                    </a>
-                    <!-- dropdown alerts-->
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i>New Comment
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i>3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i>Message Sent
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-tasks fa-fw"></i>New Task
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i>Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- end dropdown-alerts -->
-                </li>
                  <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-sign-out fa-3x" onclick="signOut()"></i>
@@ -562,8 +397,9 @@
                 <div class="col-lg-9 main-top-margin" data-scrollreveal="enter left and move 100px, wait 0.4s">
                     <h3><span class="label label-default" style="font-size:1.4em">New Project</span></h3>
                     <br>
-                        <form method="post">
+                        <form method="post" id="formProject">
                              {% csrf_token %}
+                            <input type="hidden" name="totalPerc" id="totalPerc" value="0" />
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -571,14 +407,22 @@
                                         <input type="text" class="form-control" id="projectName" name="projectName" required="required" placeholder="Project Name">
                                     </div>
                                     <div class="form-group">
-                                        <label for="usr">Subject:</label>
-                                        <input id="basics" class="form-control"/>
+                                        <label for="usr">Project Description:</label>
+                                        <textarea class="form-control" id="projectDesc" name="projectDesc" required="required" rows="5" placeholder="Introduce project description here..."></textarea>
                                     </div>
                                     <div class="form-group">
-                                      <label for="pwd">When Start:</label>
+                                        <label for="usr">Subject:</label>
+                                        <select class="form-control" id="subject" name="subject" style="width:21%">
+                                        {% for subject in subjects %}
+                                        <option value="{{ subject.id }}">{{ subject.sub_name }}</option>
+                                        {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="pwd">Start Date:</label>
                                       <input type="date" class="form-control" name="datestart" id="datestart" style="width:21%">                                    </div>
                                     <div class="form-group">
-                                      <label for="pwd">When End:</label>
+                                      <label for="pwd">End Date:</label>
                                       <input type="date" class="form-control" name="dateend" id="dateend" style="width:21%">
                                     </div>
                                 </div>
@@ -600,13 +444,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="usr">Subject Percentage (%):</label>
-                                        <input type="number" class="form-control" name="actPerc" id="actPerc" min="1" max="100" oblig="2" style="width:10%">
+                                        <input type="number" class="form-control" name="actPerc" id="actPerc" min="1" max="100" oblig="2" style="width:10%" onblur="checkNumber()">
                                     </div>
                                     <div class="form-group">
-                                      <label >When Start:</label>
+                                      <label >Start Date:</label>
                                       <input type="date" class="form-control" name="actdatestart" id="actdatestart" oblig="2" style="width:25%">                                    </div>
                                     <div class="form-group">
-                                      <label>When End:</label>
+                                      <label>End Date:</label>
                                       <input type="date" class="form-control" name="actdateend" id="actdateend" oblig="2" style="width:25%">
                                     </div>
                                 </div>
@@ -626,20 +470,20 @@
                                     <div class="form-group">
                                           <table class="table table-bordered fa-inverse" id="tableActivities" name="tableActivities" style="width:100%;">
                                               <tr style="background-color: dimgrey">
-                                                <th style="width:30%">Activity Name</th>
-                                                <th style="width:40%">Description</th>
-                                                <th style="width:10%">When Start</th>
-                                                <th style="width:10%">When End</th>
-                                                <th style="width:5%">% Assig</th>
                                                 <th>Option</th>
+                                                <th style="width:27%">Activity Name</th>
+                                                <th style="width:35%">Description</th>
+                                                <th style="width:12%">Start Date</th>
+                                                <th style="width:12%">End Date</th>
+                                                <th style="width:5%">%</th>
                                               </tr>
                                             <tbody style="background-color: whitesmoke;color:darkslategray">
                                                 <tr>
                                                     <td>
-                                                        Add Activities in this table...
+                                                        -
                                                     </td>
                                                     <td>
-                                                        -
+                                                        Add Activities in this table...
                                                     </td>
                                                     <td>
                                                         -
@@ -659,13 +503,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-10" style="height:50px"></div>
+                                <div class="col-md-2" style="height:50px">Total Percent: <span id="spanTotal" name="spanTotal">0</span> (%)</div>
+                            </div>
                             <div class="row"><div class="col-md-4" style="height:50px"></div></div>
 
                             <div class="row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <button name="accept" id="accept" type="submit" class="btn btn-success">Accept</button>
+                                        <button name="accept" id="accept" type="button" class="btn btn-success" onclick="saveProject()">Accept</button>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
