@@ -11,6 +11,7 @@ import datetime
 class Rubrica(models.Model):
     e_who = models.IntegerField(default=0)
     e_when = models.DateField(default=datetime.datetime.now, blank=True)
+    e_name = models.CharField(max_length=200)
 
 class Pregunta(models.Model):
     p_enc_id = models.ForeignKey(Rubrica)
@@ -44,7 +45,7 @@ class Project(models.Model):
     pr_deadline = models.DateField(default=timezone.now)
 
 class RubricaProject(models.Model):
-    rp_project = models.ForeignKey(Subject)
+    rp_project = models.ForeignKey(Project)
     rp_rubrica = models.ForeignKey(Rubrica)
 
 class Actividad(models.Model):

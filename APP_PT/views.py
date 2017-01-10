@@ -1,10 +1,10 @@
 from django.shortcuts import render, render_to_response
-from .models import User, Actividad, Project, Subject, Pregunta, Rubrica, RubricaProject, Equipo
+from .models import User, Actividad, Project, Subject, Pregunta, Rubrica, RubricaProject, Equipo, Participante
 from .forms import CreateAccount, CreateProject, CreateActivity, CreatePoll, Login
 from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.conf import settings
-import json
+import json, datetime
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.utils import timezone
@@ -52,7 +52,7 @@ def signout(request):
 def menu(request):
     projects = Project.objects.filter(pr_user_id=request.session["idUser"])
     subjects = Subject.objects.filter(sub_who=request.session['idUser'])
-    return render(request, 'APP_PT/menu.html', {'projects': projects, 'subjects': subjects})
+    return render(request, 'APP_PT/menu.html', {'projects': projects, 'subjects': subjects, 'today': datetime.datetime.now})
 
 def newProject(request):
     if request.method == "POST":
@@ -67,10 +67,14 @@ def newProject(request):
                     if "actName|" + str(x) in request.POST:
                         activity = Actividad(ac_name=request.POST.get("actName|" + str(x)),ac_description=request.POST.get("actDesc|" + str(x)),ac_percentage=request.POST.get("actPerc|" + str(x)),ac_ini_date=request.POST.get("actdatestart|" + str(x)),ac_deadline=request.POST.get("actdateend|" + str(x)),ac_projectID=project)
                         activity.save()
+        rubrica = Rubrica.objects.get(id=request.POST.get("poll"))
+        rubpro = RubricaProject(rp_project=project,rp_rubrica=rubrica)
+        rubpro.save()
         return redirect('APP_PT.views.menu')
     else:
         subjects = Subject.objects.filter(sub_who=request.session['idUser'])
-        return render(request, 'APP_PT/formProject.html', {'subjects': subjects})
+        polls = Rubrica.objects.filter(e_who=request.session['idUser'])
+        return render(request, 'APP_PT/formProject.html', {'subjects': subjects, 'polls': polls})
 
 def newTeam(request):
     if request.method == "POST":
@@ -170,12 +174,19 @@ def disable(request):
     user.save()
     return redirect('APP_PT.views.signout')
 
-def evaluateActivity(request):
+def selectTeam(request, project_id):
     if request.method == "POST":
         return
     else:
-        idProject = request.GET.get('idProject')
-        rp = RubricaProject.objects.get(rp_project_id=idProject)
-        rubrica = Rubrica.objects.get(id=rp.rp_rubrica_id)
-        questions = Pregunta.objects.filter(p_enc_id=rubrica.id)
+        idProject = project_id
+        teams = Equipo.objects.filter(eq_projectID=idProject)
+        return render(request, 'APP_PT/selectTeam.html',{'teams': teams})
+
+def evaluateProject(request, project_id):
+    if request.method == "POST":
+        return
+    else:
+        idProject = project_id
+        rp = RubricaProject.objects.get(rp_project=idProject)
+        questions = Pregunta.objects.filter(p_enc_id=rp.rp_rubrica_id)
         return render(request, 'APP_PT/evaluatePoll.html',{'questions': questions})
